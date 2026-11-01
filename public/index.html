@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>🕵️ Cyber Hunt</title>
+
+    <style>
+
+        body {
+
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #f5f7fa;
+
+        }
+
+        .box {
+
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+
+        }
+
+        h1 {
+
+            text-align: center;
+
+        }
+
+        input,
+        select,
+        button,
+        textarea {
+
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+
+        }
+
+        button {
+
+            cursor: pointer;
+
+        }
+
+        textarea {
+
+            width: 100%;
+            height: 80px;
+            resize: vertical;
+
+        }
+
+        #phase {
+
+            color: #d32f2f;
+
+        }
+
+        #status {
+
+            color: #1565c0;
+
+        }
+
+        #winner {
+
+            color: green;
+            font-size: 24px;
+            font-weight: bold;
+
+        }
+
+        #currentRoom {
+
+            color: #6a1b9a;
+            margin-top: 10px;
+
+        }
+
+        ul {
+
+            padding-left: 20px;
+
+        }
+
+        .hint {
+
+            color: #666;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h1>🕵️ Cyber Hunt</h1>
+
+    <!-- ROOM SECTION -->
+
+    <div class="box">
+
+        <h2>Join Or Create Room</h2>
+
+        <input
+            id="name"
+            placeholder="Your Name">
+
+        <br>
+
+        <button id="createRoomBtn">
+            Create Room
+        </button>
+
+        <hr>
+
+        <input
+            id="roomCode"
+            placeholder="Enter Room Code">
+
+        <button id="joinBtn">
+            Join Room
+        </button>
+
+        <h3 id="currentRoom"></h3>
+
+    </div>
+
+    <!-- INSTRUCTIONS -->
+
+    <div class="box">
+
+        <h2>📖 How To Play</h2>
+
+        <ol>
+
+            <li>
+                Create a room and share the room code.
+            </li>
+
+            <li>
+                3 to 8 players join the room.
+            </li>
+
+            <li>
+                One player secretly becomes the Hacker.
+            </li>
+
+            <li>
+                Everyone else becomes Analysts.
+            </li>
+
+            <li>
+                Analysts know the topic.
+            </li>
+
+            <li>
+                The Hacker does NOT know the topic.
+            </li>
+
+            <li>
+                Everyone submits one clue.
+            </li>
+
+            <li>
+                Do NOT reveal the topic directly.
+            </li>
+
+            <li>
+                Vote for who you think is the Hacker.
+            </li>
+
+            <li>
+                If the Hacker is identified,
+                Analysts win.
+            </li>
+
+            <li>
+                If the Hacker avoids detection,
+                Hacker wins.
+            </li>
+
+        </ol>
+
+    </div>
+
+    <!-- GAME STATUS -->
+
+    <div class="box">
+
+        <h2 id="phase">
+            Phase 1: Waiting For Players
+        </h2>
+
+        <button id="startBtn">
+            Start Game
+        </button>
+
+        <h2 id="status">
+            Waiting...
+        </h2>
+
+        <h3 id="question"></h3>
+
+    </div>
+
+    <!-- CLUE SECTION -->
+
+    <div class="box">
+
+        <h2>💡 Submit Your Clue</h2>
+
+        <p class="hint">
+            Give ONE clue without revealing
+            the topic.
+        </p>
+
+        <h4>Examples</h4>
+
+        <ul>
+
+            <li>
+                ✅ Used on public Wi‑Fi
+            </li>
+
+            <li>
+                ✅ Encrypts traffic
+            </li>
+
+            <li>
+                ✅ Blocks unwanted traffic
+            </li>
+
+            <li>
+                ❌ VPN
+            </li>
+
+            <li>
+                ❌ Firewall
+            </li>
+
+        </ul>
+
+        <textarea
+            id="answer"
+            placeholder="Enter your clue here..."></textarea>
+
+        <br>
+
+        <button id="submitBtn">
+            Submit Clue
+        </button>
+
+    </div>
+
+    <!-- CLUES -->
+
+    <div class="box">
+
+        <h2>📝 Submitted Clues</h2>
+
+        <ul id="answers"></ul>
+
+    </div>
+
+    <!-- VOTING -->
+
+    <div class="box">
+
+        <h2>🗳 Vote For The Hacker</h2>
+
+        <p class="hint">
+            Read all clues and vote for
+            the most suspicious player.
+        </p>
+
+        <select id="votePlayer"></select>
+
+        <button id="voteBtn">
+            Submit Vote
+        </button>
+
+    </div>
+
+    <!-- RESULT -->
+
+    <div class="box">
+
+        <h2>🏆 Result</h2>
+
+        <h2 id="winner"></h2>
+
+    </div>
+
+    <!-- PLAYERS -->
+
+    <div class="box">
+
+        <h2>👥 Players In Room</h2>
+
+        <ul id="players"></ul>
+
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
